@@ -1,0 +1,35 @@
+PAGINA HOME:
+- Visualizzare tutti i ristoranti divisi per categorie: vicini a te o consigliati per te
+- Ricercare ristoranti
+- Filtrare per distanza, intolleranze ecc.
+- Visualizzare tutti i ristoranti su mappa 
+
+RISTORANTE LATO CLIENTE:
+- Visualizzare dettagli
+- Visualizzare menù scritto (no foto)
+- Visualizzare orari disponibili di prenotazione
+- Richiesta di prenotazione
+- Eliminare o modificare prenotazione entro un tot di tempo 
+- Visualizzare dettagli prenotazione
+- Possibilità di recensire il ristorante
+
+RISTORANTE LATO PROPRIETARIO:
+- Inserire e/o modificare dettagli del ristorante
+- Aggiungere e/o modificare menù
+- Gestire prenotazioni (approvare , contattare cliente)
+- Statistiche prenotazioni giornaliere, settimanali, mensili
+
+ACCOUNT CLIENTE
+- Personalizzazione del profilo (immagine, informazioni varie, password ecc.)
+- Possibilità di salvare ristoranti preferiti 
+- indicare intolleranze alimentari
+- Visualizzare prenotazioni passate e future
+
+AMMINISTRATORE:
+- Gestire clienti (bannare, eliminare recensioni ecc.)
+- Gestire ristoranti (approvare o rifiutare iscrizione)
+- Form di contatto
+
+API:
+- Registrazione con Facebook/google
+- Google maps
