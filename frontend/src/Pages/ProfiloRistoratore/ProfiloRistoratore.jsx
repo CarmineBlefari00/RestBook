@@ -7,6 +7,10 @@ import scaleImage from './ImageConverter.js';
 import { AddressAutofill } from '@mapbox/search-js-react';
 import Select from 'react-select';
 import scaleCopertina from './copertinaConverter.js';
+import OwlCarousel from 'react-owl-carousel';
+import CardRecensioni from '../../Components/CardRecensioni/CardRecensioni'; 
+
+
 
 const updateAvatarUrl = `http://${address}:8080/updateUserAvatar`;
 const resetAvatarUrl = `http://${address}:8080/resetUserAvatar`;
@@ -20,6 +24,7 @@ const updateIntolleranzeUrl = `http://${address}:8080/updateIntolleranzeRistoran
 const updateLinkMenuUrl = `http://${address}:8080/updateLinkMenuRistorante`;
 const updateFileMenuUrl = `http://${address}:8080/updateFileMenu`;
 const updateCopertinaUrl = `http://${address}:8080/updateCopertinaRistorante`;
+const getRecensioniUrl = `http://${address}:8080/getRecensioni`;
 
 
 const intolleranzeTesto = [
@@ -28,7 +33,37 @@ const intolleranzeTesto = [
     { value: 'Nickel', label: 'Nickel' },
     { value: 'Favismo', label: 'Favismo' },
   ]
-
+//Owl Carousel Settings
+const options = {
+    margin: 30,
+    responsiveClass: true,
+    nav: true,
+    autoplay: false,
+    smartSpeed: 1000,
+    responsive: {
+        0: {
+            items: 1,
+        },
+        200: {
+            items: 1,
+        },
+        600:{
+            items: 1,
+        },
+        700: {
+            items: 2,
+        },
+        1080: {
+            items: 1,
+        },
+        1500:{
+          items: 2,
+        },
+        1920: {
+          items: 2,
+      }
+    },
+  };
 function isEmptyObject(obj) {
     for(var prop in obj) {
         if(obj.hasOwnProperty(prop)){
@@ -43,7 +78,7 @@ const NameAndImage = (props) => {
     const [image, setImage] = useState(null);
     const [dropdownImageActive, setDropdownImageActive] = useState(false);
     const inputImage = useRef(null);
-    
+
     //se cambia l'immagine, la posto al backend
     useEffect(() => {
         if(image !== null)
@@ -117,7 +152,7 @@ const NameAndImage = (props) => {
         setDropdownImageActive(false);
     }
 
-  
+
     return (
         <div className='name-image-container'>
             <ul className='name-image-list'>
@@ -162,7 +197,43 @@ const AccountInfo = (props) => {
     const [fileInputField, setFileInputField] = useState(null);
     const [copertinaEditable, setCopertinaEditable] = useState(false);
     const [copertinaInputField, setCopertinaInputField] = useState(null);
+    const [recensioni, setRecensioni] = useState([]);
 
+      //RECENSIONI
+  useEffect(() => { //FUNZIONE CHE RICHIAMA LA VISUALIZZAZIONE DELLE RECENSIONI
+    // N.B. SE IL RISTORANTE NON VIENE CARICATO QUESTA FUNZIONE DA PROBLEMI E RITORNA NULL
+   //console.log(ristorante?.nome);
+   getRecensioni();
+   
+  }, []);
+  
+  const getRecensionioptions = { //JSON DA INVIARE A BACKEND PER OTTENERE RECENSIONI RISTORANTE
+    method : 'POST',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'ristorante': props.ristoratore.nome
+  }),
+  }
+  function getProfilePicture(im) {
+    if(im === null)
+        return require("../../Images/avatar.png");
+    else
+        return "data:image/png;base64," + im;
+  }
+    const getRecensioni = () => {
+     fetch(getRecensioniUrl, getRecensionioptions)
+        .then((res) => {
+            if(res.status === 200) {
+              res.json().then(result => setRecensioni(result));
+              console.log("recensioni prese");
+            }
+        });
+  }
+
+
+    //_---------------
     useEffect(() => {   
         if(props.user && props.user.email != undefined)
             setEmailInputField(props.user.email);
@@ -790,7 +861,18 @@ const AccountInfo = (props) => {
                     <p>{props.confirmMessage}</p>
                 </div>
             )}
-       
+         <div className='item-container'>
+                <OwlCarousel className="owl-theme" {...options}
+                  items={3}      
+                  nav  
+                  margin={-120}> 
+                   {recensioni?.map((recensione) => (
+                    
+                    <CardRecensioni testo={recensione.recensione} voto={recensione.voto} immagine={getProfilePicture(recensione?.immagine)} utente={recensione.utente}/>
+                    
+                    ))}
+                </OwlCarousel>
+                </div>
         </div>
         
     );

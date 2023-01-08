@@ -47,6 +47,23 @@ public class RistoratoreDaoJDBC extends RistoratoreDao{
         stm.close();
         return list;
     }
+    
+    @Override
+    public List<Ristoratore> filterRestaurants(String s) throws SQLException {
+        List <Ristoratore> list = new ArrayList<>();
+        Statement stm = DBConnection.getInstance().getConnection().createStatement();
+        ResultSet rs = stm.executeQuery(getAllQuery);
+        while(rs.next()) {
+            Ristoratore ristoratore = Ristoratore.parseFromDB(rs);
+            String NomeRistorante=ristoratore.getNome();
+            if (NomeRistorante.toLowerCase().contains(s.toLowerCase())) {
+            	list.add(ristoratore);
+            }
+        }
+
+        stm.close();
+        return list;
+    }
 
     @Override
     public void save(Ristoratore obj) throws SQLException {

@@ -15,13 +15,15 @@ export default function MyRoutes(props) {
             <Route path="/" exact element={<Home accessToken={props.accessToken} allRestaurant={props.allRestaurant} />} />
             <Route path="/login" exact element={<Login setAccessToken={props.setAccessToken}/>} />
             <Route path="/signup" exact element={<SignUp />} />
-            <Route path="/restaurant" exact element={<Restaurant fetchProfile={props.fetchProfile} ristoratore={props.ristoratore} />} />
+            <Route path="/restaurant" exact element={<Restaurant fetchProfile={props.fetchProfile} ristoratore={props.ristoratore} userLogged={props.userLogged} />}  />
+            <Route path="/CardRecensioni" exact element={<Restaurant fetchProfile={props.fetchProfile} ristoratore={props.ristoratore} userLogged={props.userLogged} />}  />
             <Route path="/profilo" exact element={<ProfiloCliente userLogged={props.userLogged} setAccessToken={props.setAccessToken}
                                                     accessToken={props.accessToken} fetchProfile={props.fetchProfile} doLogout={props.doLogout} cliente={props.cliente}/>} />
             <Route path="/profiloRistoratore" exact element={<ProfiloRistoratore userLogged={props.userLogged} setAccessToken={props.setAccessToken}
                                                     accessToken={props.accessToken} fetchProfile={props.fetchProfile} doLogout={props.doLogout} ristoratore={props.ristoratore}/>} />
             <Route path="/passwordDimenticata" exact element={<PasswordDimenticata userLogged={props.userLogged} setAccessToken={props.setAccessToken}
                                                     accessToken={props.accessToken} fetchProfile={props.fetchProfile} doLogout={props.doLogout} />} />
+            
         </Routes>
     )
 }

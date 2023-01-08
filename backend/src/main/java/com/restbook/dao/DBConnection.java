@@ -7,7 +7,7 @@ public class DBConnection {
 
     private static DBConnection instance;
     private String username = "postgres";
-    private String pass = "admin";
+    private String pass = "postgres";
     private String url = "jdbc:postgresql://localhost:5432/postgres";
 
     private Connection dbConnection = null;

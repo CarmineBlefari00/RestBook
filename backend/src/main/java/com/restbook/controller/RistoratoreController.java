@@ -308,7 +308,15 @@ public class RistoratoreController {
         List <Ristoratore> list = RistoratoreDaoJDBC.getInstance().getAll();
         return list;
     }
-
+   
+    @PostMapping("/filterRistoranti")
+    private List<Ristoratore> filterRistoranti(@RequestBody JSONObject obj, HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        List <Ristoratore> list = RistoratoreDaoJDBC.getInstance().filterRestaurants((String) obj.get("Ricerca"));
+        System.out.println(list.size());
+        return list;
+    }
+    
+    
     @GetMapping("/getRistoranteFromUsername")
     public JSONObject getRistoranteFromUsername(HttpServletRequest request, HttpServletResponse response) {
         JSONObject resp = new JSONObject();

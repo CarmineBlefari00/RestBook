@@ -17,5 +17,6 @@ public abstract  class RistoratoreDao implements Dao<Ristoratore> {
     public abstract void updateLinkMenuRistorante(Ristoratore ristorante, String linkMenu) throws SQLException;
     public abstract void updateFileMenu(byte[] fileMenu, Ristoratore ristorante) throws SQLException;
     public abstract void updateCopertinaRistorante(byte[] copertina, Ristoratore ristorante) throws SQLException;
+	public abstract List<Ristoratore> filterRestaurants(String s) throws SQLException;
 
 }

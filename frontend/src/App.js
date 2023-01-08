@@ -149,7 +149,7 @@ export default function App(props) {
       <div className='app'>
         <AppBar accessToken={accessToken} setAccessToken={saveToken} setUserLogged={setUserLogged} userLogged={userLogged} doLogout={doLogout}/> 
         <MyRoutes accessToken={accessToken} setAccessToken={saveToken} doLogout={doLogout}
-                  userLogged={userLogged} fetchProfile={fetchData} cliente={cliente} ristoratore={ristoratore} allRestaurant={allRestaurant}/>
+                  userLogged={userLogged} fetchProfile={fetchData} cliente={cliente} ristoratore={ristoratore} allRestaurant={allRestaurant} />
         <div className='footer'>
             <Footer/>
         </div>
